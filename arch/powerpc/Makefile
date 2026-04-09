@@ -61,8 +61,6 @@ else
 KBUILD_LDFLAGS_MODULE += $(objtree)/arch/powerpc/lib/crtsavres.o
 endif
 
-KBUILD_RUSTFLAGS += --target=powerpc-unknown-none
-
 ifdef CONFIG_CPU_LITTLE_ENDIAN
 KBUILD_CPPFLAGS	+= -mlittle-endian
 KBUILD_LDFLAGS	+= -EL
@@ -178,10 +176,14 @@ KBUILD_CPPFLAGS		+= -I $(srctree)/arch/powerpc $(asinstr)
 KBUILD_AFLAGS		+= $(AFLAGS-y)
 KBUILD_CFLAGS		+= $(CC_FLAGS_NO_FPU)
 KBUILD_CFLAGS		+= $(CFLAGS-y)
+ifdef CONFIG_PPC64
 ifdef CONFIG_CPU_BIG_ENDIAN
 KBUILD_RUSTFLAGS        += --target=powerpc64-unknown-none
 else
 KBUILD_RUSTFLAGS        += --target=powerpc64le-unknown-none
+endif
+else
+KBUILD_RUSTFLAGS += --target=powerpc-unknown-none
 endif
 
 CHECKFLAGS	+= -m$(BITS) -D__powerpc__ -D__powerpc$(BITS)__
