@@ -410,8 +410,8 @@ BINDGEN_TARGET_x86	:= x86_64-linux-gnu
 BINDGEN_TARGET_arm64	:= aarch64-linux-gnu
 BINDGEN_TARGET_arm	:= arm-linux-gnueabi
 BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
-BINDGEN_TARGET_powerpc	:= powerpc64le-linux-gnu
-# BINDGEN_TARGET_powerpc	:= powerpc-linux-gnu
+BINDGEN_TARGET_powerpc64	:= powerpc64le-unknown-none
+BINDGEN_TARGET_powerpc	:= powerpc-unknown-none
 BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
 BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
 

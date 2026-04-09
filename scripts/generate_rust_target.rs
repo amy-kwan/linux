@@ -189,15 +189,7 @@ fn main() {
     } else if cfg.has("ARM64") {
         panic!("arm64 uses the builtin rustc aarch64-unknown-none target");
     } else if cfg.has("PPC32") {
-        ts.push("arch", "powerpc");
-        ts.push("data-layout", "E-m:e-p:32:32-Fn32-i64:64-n32");
-        ts.push("features", "+soft-float");
-        ts.push("llvm-target", "powerpc-unknown-eabi");
-        if cfg.rustc_version_atleast(1, 91, 0) {
-            ts.push("target-pointer-width", 32);
-        } else {
-            ts.push("target-pointer-width", "32");
-        }
+        panic!("ppc32 uses the builtin rustc ppc32-unknown-none target");
     } else if cfg.has("RISCV") {
         if cfg.has("64BIT") {
             panic!("64-bit RISC-V uses the builtin rustc riscv64-unknown-none-elf target");
@@ -267,29 +259,7 @@ fn main() {
     } else if cfg.has("LOONGARCH") {
         panic!("loongarch uses the builtin rustc loongarch64-unknown-none-softfloat target");
     } else if cfg.has("PPC64") {
-        ts.push("arch", "powerpc64");
-        ts.push(
-            "data-layout",
-            if cfg.has("CPU_LITTLE_ENDIAN") {
-                "e-m:e-Fn32-i64:64-n32:64-S128-v256:256:256-v512:512:512"
-            } else {
-                "E-m:e-Fn32-i64:64-n32:64-S128-v256:256:256-v512:512:512"
-            },
-        );
-        ts.push("features", "-mma,-altivec,-vsx,-hard-float");
-        ts.push(
-            "llvm-target",
-            if cfg.has("CPU_LITTLE_ENDIAN") {
-                "powerpc64le-linux-gnu"
-            } else {
-                "powerpc64-linux-gnu"
-            },
-        );
-        if cfg.rustc_version_atleast(1, 91, 0) {
-            ts.push("target-pointer-width", 64);
-        } else {
-            ts.push("target-pointer-width", "64");
-        }
+        panic!("ppc64 uses the builtin rustc ppc64-unknown-none-softfloat target");
     } else {
         panic!("Unsupported architecture");
     }
